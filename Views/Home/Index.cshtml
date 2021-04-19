@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "SEO Tester";
+}
+@model SeoSearchModel
+
+<div class="text-center">
+    <form method="post">
+        @Html.DropDownListFor(m => m.SearchEngine, @Model.SearchEngines, "Select search engine", new Dictionary<string,
+        object>())
+        <hr>
+        @Html.LabelFor(m => m.Keywords)
+        @Html.TextBoxFor(m => m.Keywords)
+        <hr>
+        @Html.LabelFor(m => m.MatchUrl, "Match Url")
+        @Html.TextBoxFor(m => m.MatchUrl)
+        <hr>              
+        <input type="submit" value="Submit" />
+        <hr>
+        @if (Model.MatchPosition == -1)
+        {
+            <p>Found no results - @Model.SearchTime.ToString() @TimeZoneInfo.Local.ToString()</p>
+        }
+        @if (Model.MatchPosition > 0)
+        {
+            <p>Found result at position @Model.MatchPosition - @Model.SearchTime.ToString() @TimeZoneInfo.Local.ToString()</p>
+        }  
+    </form>
+</div>
